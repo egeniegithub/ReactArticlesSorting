@@ -1,31 +1,55 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
+
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Button,
+} from "@material-ui/core";
+
 import { makeStyles } from "@material-ui/core/styles";
+
 import MenuIcon from "@material-ui/icons/Menu";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+
+import { useHistory } from "react-router-dom";
+
 const Navbar = () => {
   const classes = useStyles();
+
+  const history = useHistory();
   return (
-    <Router>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            className={classes.menuButton}
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Test Job
-          </Typography>
-          <Link className={classes.link} to="/about">
-            About
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </Router>
+    <AppBar position="static">
+      <Toolbar>
+        <IconButton
+          className={classes.menuButton}
+          edge="start"
+          color="inherit"
+          aria-label="menu"
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+          Articles Sorting App
+        </Typography>
+        <Button
+          className={classes.link}
+          onClick={() => {
+            history.push("/");
+          }}
+        >
+          Articles
+        </Button>
+        <Button
+          className={classes.link}
+          onClick={() => {
+            history.push("/about");
+          }}
+        >
+          About
+        </Button>
+      </Toolbar>
+    </AppBar>
   );
 };
 

@@ -4,7 +4,7 @@ import { Grid, Typography } from "@material-ui/core";
 const About = () => {
   return (
     <Grid container>
-      <Typography variant="h1" component="h2">
+      <Typography variant="h1" component="h1">
         About
       </Typography>
     </Grid>

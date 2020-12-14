@@ -1,6 +1,5 @@
 // global
 import React from "react";
-import { useHistory } from "react-router-dom";
 
 // material-ui
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,10 +11,10 @@ import {
   CardActions,
   CardActionArea,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
   Link,
+  Divider,
 } from "@material-ui/core";
 
 import Content from "../../components/Content";
@@ -25,17 +24,11 @@ import Votes from "../../components/Votes";
 const useStyles = makeStyles({
   card: {
     display: "flex",
-    maxWidth: 840,
-    // adding to fill out short posts.
     minWidth: 840,
     margin: 10,
-    boxShadow:
-      "3px -2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 9px 1px 3px 0px rgba(0,0,0,0.12)",
-    flexdirection: "row",
   },
   cardDetails: {
-    //float: 'right',
-    //padding: 140
+    textAlign: "left",
   },
   cardVotes: {
     maxWidth: 120,
@@ -47,15 +40,11 @@ const useStyles = makeStyles({
   },
 });
 
-const ArticleCard = ({ post, main }) => {
+const ArticleCard = ({ post }) => {
   const classes = useStyles();
-  const history = useHistory();
 
   return (
-    <Box
-      // ml={post.depth * 10}
-      width="100%"
-    >
+    <Box width="100%">
       <Grid item xs={12}>
         <Card className={classes.card} key={post.id}>
           <CardContent className={classes.cardVotes}>
@@ -63,7 +52,6 @@ const ArticleCard = ({ post, main }) => {
               <KeyboardArrowUp />
             </Button>
             <Button size="small" color="primary">
-              {/*post.votes*/}
               <Votes vote={post.votes} />
             </Button>
             <Button size="small" color="primary" float="right">
@@ -74,17 +62,22 @@ const ArticleCard = ({ post, main }) => {
           <Grid item xs={12} className={classes.cardDetails}>
             <CardActionArea component="a" href="#">
               <CardContent>
-                <Typography component="h2" variant="h5">
+                <Typography component="h4" variant="h4">
                   {post.title}
                 </Typography>
+
+                <Typography component="span" variant="p">
+                  {post.description}
+                </Typography>
+                <Divider style={{ marginTop: 50, marginBottom: 5 }} />
                 <Typography variant="subtitle1" color="textSecondary">
                   posted by{" "}
                   <Link>
-                    u/
                     {post.author != null
                       ? post.author.username.split(" ").join("").toLowerCase()
                       : "username"}
-                  </Link>{" "}
+                  </Link>
+                  &nbsp;
                   <Duration inputDate={post.createdDate} />
                 </Typography>
                 <Content content={post.content} mode="display" />

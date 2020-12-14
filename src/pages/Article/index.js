@@ -1,13 +1,15 @@
 // global
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 
 // material-ui
 import { makeStyles } from "@material-ui/core/styles";
-import { Box, Typography, Button, Grid, TextField } from "@material-ui/core";
+import { Typography, Button, Grid, Divider } from "@material-ui/core";
+
 import uuid from "react-uuid";
-import Data from "../Data.json";
+
 import ArticleCardList from "./ArticleCardList";
+
+import Data from "../Data.json";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -17,7 +19,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Article = ({}) => {
   const classes = useStyles();
-  const history = useHistory();
 
   const [articlesData, setArticlesData] = useState(
     Data.sort(function (a, b) {
@@ -41,51 +42,72 @@ const Article = ({}) => {
     setArticlesData(filterData);
   };
   return (
-    <>
+    <div style={{ width: 1496 }}>
       <Grid
         container
         direction="row"
         alignItems="center"
         className={classes.page}
       >
-        <Grid container style={{ margin: 15 }}>
-          <Grid item xs={12} sm={12} md={12} lg={12}>
-            <Typography variant="h2" style={{ textShadow: "2px 2px grey" }}>
-              Article's Sorting App
-            </Typography>
-          </Grid>
+        <Grid item xs={12} sm={12} md={12} lg={12}>
+          <Typography variant="h2" style={{ textShadow: "2px 2px grey" }}>
+            Article's Sorting App
+          </Typography>
         </Grid>
-        <Grid container xs={12} lg={10} xl={10} style={{ marginLeft: 11 }}>
-          <Grid
-            container
-            item
-            xs={12}
-            lg={10}
-            xl={10}
-            spacing={3}
-            style={{ marginBottom: "1px" }}
-          >
-            <Button
-              variant="contained"
-              style={{ marginRight: "11px" }}
-              onClick={() => applyFilter("votes")}
-            >
-              Most Upvoted
-            </Button>
-            <Button
-              variant="contained"
-              onClick={() => applyFilter("createdDate")}
-            >
-              Most Recent
-            </Button>
-          </Grid>
-        </Grid>
-
-        <Box>
-          <ArticleCardList key={uuid()} postData={articlesData} main={false} />
-        </Box>
       </Grid>
-    </>
+
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.page}
+      >
+        <Grid
+          item
+          xs={12}
+          md={12}
+          lg={12}
+          xl={12}
+          spacing={3}
+          style={{ marginBottom: "1px" }}
+        >
+          <Button
+            variant="contained"
+            style={{ marginRight: "11px" }}
+            onClick={() => applyFilter("votes")}
+          >
+            Most Upvoted
+          </Button>
+          <Button
+            variant="contained"
+            onClick={() => applyFilter("createdDate")}
+          >
+            Most Recent
+          </Button>
+        </Grid>
+      </Grid>
+
+      <Divider style={{ marginTop: 15, marginBottom: 15 }} />
+
+      <Grid
+        container
+        direction="row"
+        alignItems="center"
+        className={classes.page}
+      >
+        <Grid
+          item
+          xs={12}
+          md={12}
+          lg={12}
+          xl={12}
+          spacing={3}
+          style={{ marginBottom: "1px" }}
+        >
+          <ArticleCardList key={uuid()} postData={articlesData} main={false} />
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
